@@ -12,12 +12,6 @@ code {
     monospace;
 }
 
-h1 {
-  font-family: 'Open Sans', sans-serif;
-  color: #000000;
-  margin: 0;
-  text-align: center;
-  /* padding-top: 20px; */
-  /* padding-bottom: 20px; */
-  /* font-size: 28px; */
+main {
+  min-height: 80vh;
 }

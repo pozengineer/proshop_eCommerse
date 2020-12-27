@@ -1,0 +1,31 @@
+{
+  "name": "proshop_ecommerse",
+  "version": "1.0.0",
+  "description": "MERN shopping cart app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run start:prod || npm run start:dev",
+    "start:prod": "node backend/server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "seed": "node scripts/seedDB.js",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pozengineer/proshop_eCommerse.git"
+  },
+  "author": "dhani pozniak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pozengineer/proshop_eCommerse/issues"
+  },
+  "homepage": "https://github.com/pozengineer/proshop_eCommerse#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
+}

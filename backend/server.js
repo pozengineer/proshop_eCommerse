@@ -1,7 +1,9 @@
-const express = require("express");
-const products = require('./data/products');
-const cors = require('cors');
+import express from "express";
+import dotenv from "dotenv";
+import products from './data/products.js';
+import cors from 'cors';
 
+dotenv.config();
 const app = express();
 app.use(cors());
 const PORT = process.env.PORT || 5001;
@@ -22,5 +24,5 @@ app.get('/api/products/:id', (req, res) => {
 
 // Start the API server
 app.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+  console.log(`🌎  ==> API Server now listening in ${process.env.NODE_ENV} mode on PORT ${PORT}!`);
 });

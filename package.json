@@ -3,16 +3,19 @@
   "version": "1.0.0",
   "description": "MERN shopping cart app",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run start:prod || npm run start:dev",
+    "start": "npm run start:dev || npm run start:prod",
     "start:prod": "node backend/server.js",
-    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-    "client": "cd client && npm run start",
+    "start:dev": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "npm start --prefix client",
     "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "server": "nodemon backend/server",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -26,6 +29,11 @@
   "homepage": "https://github.com/pozengineer/proshop_eCommerse#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6"
   }
 }

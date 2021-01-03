@@ -15,7 +15,9 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build",
     "server": "nodemon backend/server",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "data:import": "node backend/seeder",
+    "data:destroy": "node backend/seeder -d"
   },
   "repository": {
     "type": "git",
@@ -28,10 +30,12 @@
   },
   "homepage": "https://github.com/pozengineer/proshop_eCommerse#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
     "mongoose": "^5.11.9"
   },
   "devDependencies": {

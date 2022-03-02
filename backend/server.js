@@ -6,7 +6,7 @@ import connectDB from './config/db.js';
 import cors from 'cors';
 
 import logger from "morgan";
-import mongoose from "mongoose";
+//import mongoose from "mongoose";
 import bodyParser from "body-parser";
 //import routes from "./routes";
 //import passport from "passport";

@@ -12,14 +12,33 @@ import bodyParser from "body-parser";
 //import passport from "passport";
 import path from "path";
 
-//import productRoutes from './routes/productRoutes.js';
+import productRoutes from './routes/productRoutes.js';
 
 dotenv.config();
 
-connectDB()
+//connectDB()
 const app = express();
 app.use(cors());
 const PORT = process.env.PORT || 5001;
+
+// Define middleware here
+app.use(logger("dev"));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+}
+
+// Bodyparser middleware
+app.use(bodyParser.json());
+app.use(cors());
+app.use(bodyParser.json());
+app.use(
+    bodyParser.urlencoded({
+        extended: false
+    })
+);
 
 app.use(express.static("public"));
 
@@ -27,14 +46,22 @@ app.get(function(req, res) {
   res.sendFile(path.join(__dirname, "../../client/build/index.html"));
 });
 
+connectDB()
+
 app.get('/', (req, res) => {
     res.send('API is running...');
 });
 
-//app.use('/api/products', productRoutes)
+app.use('/api/products', productRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // Start the API server
 app.listen(PORT, function() {

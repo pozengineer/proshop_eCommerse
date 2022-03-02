@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import colors from 'colors';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
-//import connectDB from './config/db.js';
+import connectDB from './config/db.js';
 import cors from 'cors';
 
 import logger from "morgan";
@@ -43,33 +43,16 @@ app.use(
 app.use(express.static("public"));
 
 app.get(function(req, res) {
-  res.sendFile(path.join(__dirname, "/../client/build/index.html"));
+  res.sendFile(path.join(__dirname, "../../client/build/index.html"));
 });
-
-const connectDB = async () => {
-  try {
-      const conn = await mongoose.connect(process.env.MONGO_URI, {
-          useUnifiedTopology: true,
-          useNewUrlParser: true,
-          useCreateIndex: true
-      })
-
-      console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline)
-  } catch (error) {
-      console.error(`Error: ${error.message}`.red.underline.bold)
-      process.exit(1)
-  }
-}
 
 connectDB()
 
-// app.get('/', (req, res) => {
-//     res.send('API is running...');
-// });
+app.get('/', (req, res) => {
+    res.send('API is running...');
+});
 
 app.use('/api/products', productRoutes)
-
-
 
 app.use(notFound)
 app.use(errorHandler)

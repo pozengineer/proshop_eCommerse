@@ -5,7 +5,7 @@ dotenv.config();
 
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect('mongodb+srv://pozengineer:%21ronMan2012@proshop.iw7nc.mongodb.net/proshop?retryWrites=true&w=majority', {
+        const conn = await mongoose.connect(process.env.MONGO_URI, {
             useUnifiedTopology: true,
             useNewUrlParser: true,
             useCreateIndex: true
